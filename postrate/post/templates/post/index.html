@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AllPosts</title>
+</head>
+<body>
+{% if post_list %}
+<ul>
+    {% for post in post_list %}
+    <li>{{post.post_text}}</li>
+    <p>This post has {{post.likes}} likes and {{post.dislikes}} dislikes.</p>
+    {% endfor %}
+
+</ul>
+<h2>If you want to write a post yourself, <a href="{% url 'create' %}">click here.</a></h2>
+{% else %}
+<h1>There are no posts yet...</h1>
+{% endif %}
+
+
+</body>
+</html>
