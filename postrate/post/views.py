@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
+from django.utils import timezone
 from .models import Post
 
 
@@ -15,4 +16,14 @@ def index(request):
 
 def create(request):
     template = 'post/create.html'
-    return render(request, template)
+    if request.method == 'POST':
+        post = Post()
+        post.post_text = request.POST.get("post_text")
+        post.pub_date = timezone.now()
+        post.save()
+
+        return render(request, template)
+
+    else:
+
+        return render(request, template)
