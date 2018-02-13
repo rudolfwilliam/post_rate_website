@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'post/index.css' %}" />
 <head>
     <meta charset="UTF-8">
     <title>AllPosts</title>
@@ -10,14 +12,20 @@
     {% for post in post_list %}
     <li>{{post.post_text}}</li>
     <p>This post has {{post.likes}} likes and {{post.dislikes}} dislikes.</p>
-    <p><br>Leave a Like or a Dislike!</p>
+    <form method="post">
+        {% csrf_token %}
+        <p>Leave a <button type="submit" name="like" value="{{post.id}}">Like</button> or a <button type="submit" name="dislike" value="{{post.id}}">Dislike</button>!</p>
+
+    </form>
     {% endfor %}
 
 </ul>
-<h2>If you want to write a post yourself, <a href="{% url 'create' %}">click here.</a></h2>
+
 {% else %}
-<h1>There are no posts yet...</h1>
+<h1>There are no posts...</h1>
 {% endif %}
+<h2>If you want to write a post yourself, <a href="{% url 'create' %}">click here.</a> <br/>
+    If you want to go back to the main site, <a href="/">click here</a>.</h2>
 
 
 </body>

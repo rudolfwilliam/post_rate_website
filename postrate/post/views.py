@@ -11,7 +11,24 @@ def index(request):
     post_list = Post.objects.order_by('-pub_date')
     template = loader.get_template('post/index.html')
     context = {'post_list': post_list, }
-    return HttpResponse(template.render(context, request))
+
+    if request.method == "POST":
+        like = request.POST.get('like')
+        dislike = request.POST.get('dislike')
+        if like:
+            post = Post.objects.get(id=like)
+            post.likes = (post.likes + 1)
+            post.save()
+        elif dislike:
+            post = Post.objects.get(id=dislike)
+            post.dislikes = (post.dislikes + 1)
+            post.save()
+
+        return HttpResponse(template.render(context, request))
+
+    else:
+
+        return HttpResponse(template.render(context, request))
 
 
 def create(request):

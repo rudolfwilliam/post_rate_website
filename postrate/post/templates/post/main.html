@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'post/main.css' %}" />
 <head>
     <meta charset="UTF-8">
     <title>Postrate</title>
 </head>
 <body>
 <h1>On this awesome website you can create and rate posts.</h1>
-<h2><a href="{% url 'index' %}">Click here</a> to view them all.</h2>
+<h2><a href="{% url 'index' %}">Click here</a> to view them all.<br></h2<h2>
 
 </body>
 </html>
